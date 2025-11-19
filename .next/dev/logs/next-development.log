@@ -1,0 +1,24 @@
+[00:00:03.681] Server  LOG      ✓ Ready in 2.5s
+[00:00:07.151] Server  LOG      ○ Compiling / ...
+[00:00:17.490] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:23.759] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:26.856] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:31.605] Server  LOG      ○ Compiling /select-platform ...
+[00:01:58.983] Server  LOG      ✓ Compiled in 190ms
+[00:04:21.531] Server  LOG      ✓ Compiled in 164ms
+[00:04:21.983] Browser ERROR   The final argument passed to %s changed size between renders. The order and size of this array must remain constant.
+
+Previous: %s
+Incoming: %s useEffect [] [false]
+[00:04:42.277] Server  LOG      ✓ Compiled in 461ms
+[00:08:03.844] Server  LOG      ✓ Compiled in 192ms
+[00:08:13.393] Server  LOG      ✓ Compiled in 445ms
+[00:08:17.042] Server  LOG      ✓ Compiled in 231ms
+[00:10:24.948] Server  LOG      ✓ Compiled in 291ms
+[00:11:16.265] Server  LOG      ✓ Compiled in 123ms
+[00:11:19.050] Server  LOG      ✓ Compiled in 138ms
+[00:12:21.539] Server  LOG      ✓ Compiled in 146ms
+[00:15:12.150] Server  LOG      ✓ Compiled in 126ms
+[00:34:50.623] Server  LOG        Reload env: .env.local
+[00:35:56.112] Server  LOG        Reload env: .env.local
+[00:41:26.482] Server  LOG        Reload env: .env.local
