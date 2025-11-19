@@ -36,7 +36,6 @@ export function Navbar() {
             <Link href="#testimonials" className="text-sm font-medium text-muted-foreground hover:text-white transition-colors">Success Stories</Link>
             <Link href="#pricing" className="text-sm font-medium text-muted-foreground hover:text-white transition-colors">Pricing</Link>
             <div className="flex items-center gap-4 ml-4">
-              <Link href="/login" className="text-sm font-medium hover:text-primary transition-colors">Sign in</Link>
               <Link href="/select-platform">
                 <Button className="bg-gradient-primary hover:opacity-90 text-white border-0 rounded-full px-6">
                   Get Started
@@ -69,7 +68,6 @@ export function Navbar() {
               <Link href="#testimonials" className="text-lg font-medium" onClick={() => setIsOpen(false)}>Success Stories</Link>
               <Link href="#pricing" className="text-lg font-medium" onClick={() => setIsOpen(false)}>Pricing</Link>
               <hr className="border-white/10 my-2" />
-              <Link href="/login" className="text-lg font-medium" onClick={() => setIsOpen(false)}>Sign in</Link>
               <Link href="/select-platform" onClick={() => setIsOpen(false)}>
                 <Button className="w-full bg-gradient-primary text-white border-0 rounded-full py-6 text-lg">
                   Get Started
